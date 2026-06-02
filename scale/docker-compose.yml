@@ -1,12 +1,19 @@
 services:
   web:
-    image: nginx:1.27
+    image: nginx:1.27-alpine
     ports:
       - "8080:80"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://localhost || exit 1"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      
     networks:
       - webnet
     deploy:
       replicas: 3
+
 
 
 networks:
