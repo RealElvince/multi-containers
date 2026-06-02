@@ -18,7 +18,7 @@ services:
       - webnet
 
   db:
-    image: postgres
+    image: postgres:16
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
