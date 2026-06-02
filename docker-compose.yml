@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    networks:
+      - webnet
+
+  app:
+    build: ./app
+    depends_on:
+      - db
+    networks:
+      - webnet
+
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - webnet
+
+volumes:
+  db-data:
+
+networks:
+  webnet:
