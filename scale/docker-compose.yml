@@ -1,0 +1,14 @@
+services:
+  web:
+    image: nginx:1.27
+    ports:
+      - "8080:80"
+    networks:
+      - webnet
+    deploy:
+      replicas: 3
+
+
+networks:
+  webnet:
+    driver: overlay
